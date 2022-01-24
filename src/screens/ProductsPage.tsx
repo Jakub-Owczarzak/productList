@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import ProductTable from "../components/ProductTable/ProductTable";
 import Button from "../components/UI/Button/Button";
-import SearchBar from "../components/UI/SearchBar/SearchBar";
 
 const ProductsPage: React.FC = (): JSX.Element => {
   const navigate = useNavigate();

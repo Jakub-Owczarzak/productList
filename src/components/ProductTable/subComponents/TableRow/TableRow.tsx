@@ -26,9 +26,9 @@ const TableRow: React.FC<{ product: Product }> = ({ product }): JSX.Element => {
     <tr key={product.id}>
       <td>{product.id}</td>
       <td>{product.name}</td>
-      <td>{product.quantity}</td>
       <td>{new Date(product.date).toLocaleDateString()}</td>
       <td>{product.description}</td>
+      <td>{product.quantity}</td>
       <td>{product.email}</td>
       <td>
         <Button

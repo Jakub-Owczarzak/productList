@@ -14,10 +14,10 @@ const SearchBar = ({ perPageState }: SearchBarProps): JSX.Element => {
   const dispatch = useDispatch();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length <= 1) {
+    if (event.target.value.length === 0) {
       dispatch(cleanProducts());
       dispatch(fetchProductsAsync(perPageState, 0));
-      console.log("fraza za krótka");
+
       return;
     }
     dispatch(searchProductAsync(event.target.value));

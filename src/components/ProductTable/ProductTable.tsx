@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProductsAsync,
-  cleanProducts,
-} from "../../redux/actions/actionCreator";
+import { fetchProductsAsync } from "../../redux/actions/actionCreator";
 import { RootState } from "../../redux/reducers";
 import axios from "../../api/api";
 import { ColumnNames, Product } from "../../models/product.interface";
