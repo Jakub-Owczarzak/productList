@@ -1,36 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { fetchAllProductsAsync } from '../redux/actions/actionCreator';
-import { RootState } from '../redux/reducers';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-
-
+import ProductTable from "../components/ProductTable/ProductTable";
+import Button from "../components/UI/Button/Button";
+import SearchBar from "../components/UI/SearchBar/SearchBar";
 
 const ProductsPage: React.FC = (): JSX.Element => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
-    const products = useSelector((state: RootState) => state.products.products)
-
-    const handleNavigate = (id?: number): void => {
-        if (!id) {
-            navigate("/create")
-        } else {
-            navigate(`/edit/${id}`)
-        }
-    }
-
-    useEffect(() => {
-        dispatch(fetchAllProductsAsync())
-    }, [])
-
-    return (
-        <div>
-            <button onClick={() => handleNavigate()}>Create</button>
-            <button onClick={() => handleNavigate(4)}>Edit</button>
-            <p>HELLO Products</p>
-        </div>
-    )
-}
+  const navigate = useNavigate();
+  return (
+    <div>
+      <Button title={"Create"} actionHandler={() => navigate("/create")} />
+      <ProductTable />
+    </div>
+  );
+};
 
 export default ProductsPage;
