@@ -82,6 +82,15 @@ const productReducer = (state = initialState, action: Action) => {
           [action.payload.columnName]: action.payload.sortDirection,
         },
       };
+    case ActionTypes.SEARCH:
+      return {
+        ...state,
+        products: [...action.payload],
+      };
+    case ActionTypes.CLEAN:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

@@ -5,17 +5,18 @@ import {
   Product,
   ProductBase,
   SortingDirection,
-  SortProducts,
 } from "../../models/product.interface";
 import { ActionTypes } from "../action-types/action-types";
 import axios from "../../api/api";
 
 import {
   Action,
+  CleanProducts,
   CreateProduct,
   DeleteProduct,
   EditProduct,
   FetchAllProducts,
+  SearchProducts,
   SortProduct,
 } from "./actions.interface";
 import {
@@ -52,6 +53,19 @@ const deleteProduct = (id: number): DeleteProduct => {
   };
 };
 
+export const cleanProducts = (): CleanProducts => {
+  return {
+    type: ActionTypes.CLEAN,
+  };
+};
+
+export const searchProduct = (results: Product[]): SearchProducts => {
+  return {
+    type: ActionTypes.SEARCH,
+    payload: results,
+  };
+};
+
 export const sort = (
   columnName: ColumnNames,
   sortDirection: SortingDirection
@@ -67,12 +81,9 @@ export const sort = (
 
 export const fetchProductsAsync = (limit: number, skip: number) => {
   return async (dispatch: Dispatch<Action>) => {
-    console.log(limit);
-    console.log(skip);
     const { data } = await axios.get<ProductsResponse>(
       `/Products?filter[limit]=${limit}&filter[skip]=${skip}`
     );
-    console.log("ACTION PRODUCT", data);
     dispatch(fetchProducts(data));
   };
 };
@@ -109,6 +120,21 @@ export const deleteProductAsync = (id: number) => {
         dispatch(deleteProduct(id));
       } else if (data.count === 0) {
         throw new Error("Product not found in data base");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const searchProductAsync = (inputData: string) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      const { data } = await axios.get<ProductsResponse>(
+        `Products?filter[where][name][like]=%${inputData}%`
+      );
+      if (data) {
+        dispatch(searchProduct(data));
       }
     } catch (error) {
       console.log(error);

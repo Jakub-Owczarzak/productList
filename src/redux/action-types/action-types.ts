@@ -4,4 +4,6 @@ export enum ActionTypes {
   EDIT = "edit",
   DELETE = "delete",
   SORT = "sort",
+  CLEAN = "clean",
+  SEARCH = "search",
 }

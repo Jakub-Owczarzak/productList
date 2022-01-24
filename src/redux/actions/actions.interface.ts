@@ -26,9 +26,20 @@ export interface SortProduct {
   payload: SortProducts;
 }
 
+export interface CleanProducts {
+  type: ActionTypes.CLEAN;
+}
+
+export interface SearchProducts {
+  type: ActionTypes.SEARCH;
+  payload: Product[];
+}
+
 export type Action =
   | FetchAllProducts
   | CreateProduct
   | EditProduct
   | DeleteProduct
-  | SortProduct;
+  | SortProduct
+  | CleanProducts
+  | SearchProducts;
