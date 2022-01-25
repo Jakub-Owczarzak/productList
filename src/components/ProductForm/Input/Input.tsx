@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./input.module.scss";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-
 interface FormInputProps {
   register: any;
   type: string;
@@ -19,8 +18,9 @@ const Input = ({ type, name, errorType, register }: FormInputProps) => {
           {...register(name)}
           className={styles.input}
           type={type}
-          autoComplete="off"
           name={name}
+          autoComplete="off"
+          required
         />
         <label className={styles.label}>{name}</label>
       </div>
