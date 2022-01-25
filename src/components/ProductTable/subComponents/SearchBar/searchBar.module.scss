@@ -1,0 +1,21 @@
+.wrapper {
+  margin-right: 20px;
+}
+
+.search {
+  padding: 0px 23px 0px 30px;
+  outline: 0;
+  background-color: #f5f5f5;
+  width: 300px;
+  height: 30px;
+  border: none;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    margin-right: 0px;
+  }
+  .search {
+    width: 150px;
+  }
+}

@@ -4,7 +4,9 @@ import {
   cleanProducts,
   fetchProductsAsync,
   searchProductAsync,
-} from "../../../redux/actions/actionCreator";
+} from "../../../../redux/actions/actionCreator";
+
+import styles from "./searchBar.module.scss";
 
 interface SearchBarProps {
   perPageState: number;
@@ -14,21 +16,24 @@ const SearchBar = ({ perPageState }: SearchBarProps): JSX.Element => {
   const dispatch = useDispatch();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length <= 1) {
+    if (event.target.value.length === 0) {
       dispatch(cleanProducts());
       dispatch(fetchProductsAsync(perPageState, 0));
-      console.log("fraza za krótka");
+
       return;
     }
     dispatch(searchProductAsync(event.target.value));
   };
   return (
     <>
-      <input
-        type="text"
-        placeholder="Search..."
-        onChange={handleSearchChange}
-      />
+      <div className={styles.wrapper}>
+        <input
+          className={styles.search}
+          type="text"
+          placeholder="Search..."
+          onChange={handleSearchChange}
+        />
+      </div>
     </>
   );
 };

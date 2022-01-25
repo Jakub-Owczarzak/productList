@@ -1,0 +1,88 @@
+.inputWrapper {
+  margin-bottom: 5px;
+  position: relative;
+  margin: 15px 0 5px;
+
+  .label {
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    transition: all 0.3s ease;
+    color: rgb(54, 54, 54);
+    z-index: 2;
+    display: block;
+  }
+  .input {
+    position: relative;
+    height: 35px;
+    width: 300px;
+    outline: none;
+    display: block;
+    font-size: 16px;
+    padding: 0px 10px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 2px solid silver;
+    background-color: transparent;
+    z-index: 3;
+    &:focus {
+      border-bottom: 2px solid rgb(54, 54, 54);
+    }
+  }
+  .textarea {
+    position: relative;
+    min-height: 35px;
+    max-height: 850px;
+    min-width: 600px;
+    max-width: 600px;
+    outline: none;
+    display: block;
+    font-size: 16px;
+    padding: 0px 10px;
+    margin-top: 40px;
+    border: none;
+    border-bottom: 2px solid silver;
+    background-color: transparent;
+    z-index: 3;
+    overflow: auto;
+    &:focus {
+      border: 2px solid rgb(54, 54, 54);
+    }
+  }
+  .textareaLabel {
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    transition: all 0.3s ease;
+    color: rgb(54, 54, 54);
+    z-index: 2;
+    display: block;
+  }
+  .input:focus ~ .label,
+  .input:valid ~ .label {
+    transform: translateY(-20px);
+    color: #000;
+  }
+  .textarea:focus ~ .textareaLabel,
+  .textarea:valid ~ .textareaLabel {
+    transform: translateY(-30px);
+    color: #000;
+  }
+  .textarea:focus {
+    background-color: rgb(224, 222, 226);
+  }
+
+  .social {
+    width: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  .inputWrapper {
+    .textarea {
+      min-width: 300px;
+    }
+  }
+}

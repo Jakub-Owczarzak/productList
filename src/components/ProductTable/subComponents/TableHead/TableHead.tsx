@@ -4,6 +4,8 @@ import { RootState } from "../../../../redux/reducers";
 import { ColumnNames } from "../../../../models/product.interface";
 import { sort } from "../../../../redux/actions/actionCreator";
 
+import styles from "./tableHead.module.scss";
+
 const TableHead: React.FC<{ name: ColumnNames }> = ({ name }): JSX.Element => {
   const sortingOptions = useSelector(
     (state: RootState) => state.products.sortingOptions
@@ -12,6 +14,7 @@ const TableHead: React.FC<{ name: ColumnNames }> = ({ name }): JSX.Element => {
 
   return (
     <th
+      className={styles.tableHead}
       onClick={() =>
         dispatch(
           sort(name, `${sortingOptions[name] === "desc" ? "asc" : "desc"}`)

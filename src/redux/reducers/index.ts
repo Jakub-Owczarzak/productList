@@ -1,12 +1,12 @@
-
 import { combineReducers } from "redux";
+import modalReducer from "./ModalReducer";
 import productReducer from "./productReducers";
 
-
 const rootReducer = combineReducers({
-    products: productReducer
-})
+  products: productReducer,
+  modal: modalReducer,
+});
 
-export default rootReducer
+export default rootReducer;
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;

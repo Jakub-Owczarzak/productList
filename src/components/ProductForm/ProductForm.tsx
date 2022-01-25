@@ -1,16 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import axios from "../../api/api";
+import { ProductsResponse } from "../../models/axiosResponse.interfaces";
+
+import { RootState } from "../../redux/reducers";
+import { openNotificationModal } from "../../redux/actions/modalActionCreator";
 import {
   createProductAsync,
   editProductAsync,
 } from "../../redux/actions/actionCreator";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { RootState } from "../../redux/reducers";
-import { useNavigate } from "react-router-dom";
-import axios from "../../api/api";
-import { ProductsResponse } from "../../models/axiosResponse.interfaces";
+
+import styles from "./productForm.module.scss";
+import Button from "../UI/Button/Button";
+import Input from "./Input/Input";
 
 type FormData = {
   name: string;
@@ -52,7 +59,10 @@ const ProductForm = ({ itemId }: ProductFormProps): JSX.Element => {
       const { data } = await axios.get<ProductsResponse>(
         `/Products?filter[where][name]=${name}`
       );
-      if (data.length > 0) return false;
+      if (data.length > 0) {
+        dispatch(openNotificationModal("Product name must be unique!", true));
+        return false;
+      }
 
       return true;
     } catch (err) {
@@ -64,6 +74,7 @@ const ProductForm = ({ itemId }: ProductFormProps): JSX.Element => {
     if (itemId) {
       const editedItem = { ...data, id: parseInt(itemId), date: new Date() };
       dispatch(editProductAsync(editedItem));
+      navigate("/");
       return;
     }
     const newProduct = { ...data, date: new Date() };
@@ -79,20 +90,39 @@ const ProductForm = ({ itemId }: ProductFormProps): JSX.Element => {
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <label> Name</label>
-      <input {...register("name")} />
-      <p>{errors.name?.message}</p>
-      <label>Quantity</label>
-      <input type="number" {...register("quantity")} />
-      <p>{errors.quantity?.message}</p>
-      <label>Description</label>
-      <input {...register("description")} />
-      <p>{errors.description?.message}</p>
-      <label>Email</label>
-      <input {...register("email")} />
-      <p>{errors.email?.message}</p>
-      <button type="submit">SetValue</button>
+    <form className={styles.formWrapper} onSubmit={onSubmit}>
+      <Input
+        name={"name"}
+        register={register}
+        type={"string"}
+        errorType={errors.name?.message}
+      />
+      <Input
+        name={"quantity"}
+        register={register}
+        type={"number"}
+        errorType={errors.quantity?.message}
+      />
+      <Input
+        name={"description"}
+        register={register}
+        type={"string"}
+        errorType={errors.description?.message}
+      />{" "}
+      <Input
+        name={"email"}
+        register={register}
+        type={"email"}
+        errorType={errors.description?.message}
+      />
+      <div className={styles.buttonWrapper}>
+        <Button
+          type="previous"
+          title="Back"
+          actionHandler={() => navigate("/")}
+        />
+        <Button type="next" title={itemId ? "Edit" : "Add"} />
+      </div>
     </form>
   );
 };
