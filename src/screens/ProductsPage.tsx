@@ -1,14 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 import ProductTable from "../components/ProductTable/ProductTable";
-import Button from "../components/UI/Button/Button";
+
+import classNames from "classnames";
+import styles from "./ProductPage.module.scss";
 
 const ProductsPage: React.FC = (): JSX.Element => {
-  const navigate = useNavigate();
   return (
-    <div>
-      <Button title={"Create"} actionHandler={() => navigate("/create")} />
+    <div className={classNames(styles.wrapper)}>
       <ProductTable />
     </div>
   );

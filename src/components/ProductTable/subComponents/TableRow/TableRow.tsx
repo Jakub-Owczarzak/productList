@@ -1,43 +1,53 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../../../models/product.interface";
 import Button from "../../../UI/Button/Button";
 
-const TableRow: React.FC<{ product: Product }> = ({ product }): JSX.Element => {
+import classNames from "classnames";
+import styles from "./tableRow.module.scss";
+import { useDispatch } from "react-redux";
+import { openDeleteItemModal } from "../../../../redux/actions/modalActionCreator";
+
+type TableRowProps = {
+  index: number;
+  product: Product;
+};
+
+const TableRow = ({ product, index }: TableRowProps): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleNavigate = (id?: number): void => {
-    if (!id) {
-      navigate("/create");
-    } else {
-      navigate(`/edit/${id}`);
-    }
-  };
 
   const handleNavigateEdit = (id: number) => {
     navigate(`/edit/${id}`);
   };
 
-  const handleOpenDeleteModal = (id: number) => {
+  const handleOpenDeleteModal = (id: number, name: string) => {
     console.log("MODAL");
+    dispatch(openDeleteItemModal(id, name));
   };
   return (
-    <tr key={product.id}>
+    <tr
+      className={classNames(styles.tableRowData, {
+        [styles.tableRowDataEven]: index % 2 === 0,
+        [styles.tableRowDataOdd]: index % 2 !== 0,
+      })}
+    >
       <td>{product.id}</td>
       <td>{product.name}</td>
       <td>{new Date(product.date).toLocaleDateString()}</td>
       <td>{product.description}</td>
       <td>{product.quantity}</td>
       <td>{product.email}</td>
-      <td>
+      <td className={styles.rowButtonsWrapper}>
         <Button
           title={"Edit"}
           actionHandler={() => handleNavigateEdit(product.id)}
+          type="edit"
         />
         <Button
           title="Delete"
-          actionHandler={() => handleOpenDeleteModal(product.id)}
+          actionHandler={() => handleOpenDeleteModal(product.id, product.name)}
+          type="delete"
         />
       </td>
     </tr>

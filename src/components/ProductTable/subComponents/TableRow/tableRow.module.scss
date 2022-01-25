@@ -1,0 +1,16 @@
+.tableRowData {
+  text-align: center;
+  & td {
+    padding: 10px;
+  }
+}
+.tableRowDataEven {
+  background-color: #242e38;
+}
+.tableRowDataOdd {
+  background-color: #2c3844;
+}
+
+.rowButtonsWrapper {
+  display: flex;
+}
