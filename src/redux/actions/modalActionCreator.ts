@@ -43,7 +43,6 @@ export const openDeleteItemModal = (
   id: number,
   message: string
 ): OpenContentModal => {
-  console.log(message);
   return {
     type: ModalActionTypes.CONTEN_MODAL_OPEN,
     payload: { id, message },

@@ -1,21 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import axios from "../../api/api";
+import { ProductsResponse } from "../../models/axiosResponse.interfaces";
+
+import { RootState } from "../../redux/reducers";
+import { openNotificationModal } from "../../redux/actions/modalActionCreator";
 import {
   createProductAsync,
   editProductAsync,
 } from "../../redux/actions/actionCreator";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { RootState } from "../../redux/reducers";
-import { useNavigate } from "react-router-dom";
-import axios from "../../api/api";
-import { ProductsResponse } from "../../models/axiosResponse.interfaces";
-import { openNotificationModal } from "../../redux/actions/modalActionCreator";
-import Input from "./Input/Input";
 
 import styles from "./productForm.module.scss";
 import Button from "../UI/Button/Button";
+import Input from "./Input/Input";
 
 type FormData = {
   name: string;

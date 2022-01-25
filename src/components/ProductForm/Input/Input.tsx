@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import styles from "./input.module.scss";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+
 
 interface FormInputProps {
   register: any;

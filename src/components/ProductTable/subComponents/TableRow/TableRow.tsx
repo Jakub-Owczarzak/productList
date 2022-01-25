@@ -22,7 +22,6 @@ const TableRow = ({ product, index }: TableRowProps): JSX.Element => {
   };
 
   const handleOpenDeleteModal = (id: number, name: string) => {
-    console.log("MODAL");
     dispatch(openDeleteItemModal(id, name));
   };
   return (

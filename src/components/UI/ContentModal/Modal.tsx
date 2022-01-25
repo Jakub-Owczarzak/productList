@@ -14,9 +14,7 @@ const Modal = () => {
 
   const closeModalHandler = () => {
     dispatch(closeDeleteItemModal());
-    console.log("asdsad");
   };
-  console.log(id);
 
   const deleteItem = (id: number | null) => {
     if (!id) {

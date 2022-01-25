@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  cleanProducts,
   fetchProductsAsync,
 } from "../../redux/actions/actionCreator";
 import { RootState } from "../../redux/reducers";
@@ -40,12 +39,6 @@ const ProductTable: React.FC = (): JSX.Element => {
   const handleFetchProductCount = async () => {
     const { data } = await axios.get<{ count: number }>("/Products/count");
     setProductCount(data.count);
-  };
-
-  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setPerPage(parseInt(value));
-    dispatch(cleanProducts());
   };
 
   useEffect(() => {

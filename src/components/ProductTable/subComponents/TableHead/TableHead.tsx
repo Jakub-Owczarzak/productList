@@ -4,7 +4,6 @@ import { RootState } from "../../../../redux/reducers";
 import { ColumnNames } from "../../../../models/product.interface";
 import { sort } from "../../../../redux/actions/actionCreator";
 
-import classNames from "classnames";
 import styles from "./tableHead.module.scss";
 
 const TableHead: React.FC<{ name: ColumnNames }> = ({ name }): JSX.Element => {

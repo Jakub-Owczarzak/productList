@@ -32,7 +32,7 @@ const TablePanelController = ({
 
   return (
     <div>
-      {currentPageState != 1 && (
+      {currentPageState !== 1 && (
         <Button
           actionHandler={handlePrevPage}
           title={"Previous"}
