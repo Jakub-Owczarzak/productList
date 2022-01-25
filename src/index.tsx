@@ -9,7 +9,6 @@ import CreateProductPage from "./screens/CreateProductPage";
 import EditProductPage from "./screens/EditProductPage";
 import ProductsPage from "./screens/ProductsPage";
 import { store } from "./redux/store";
-
 import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
