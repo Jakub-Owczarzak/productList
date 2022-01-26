@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import reportWebVitals from "./reportWebVitals";
 
 import CreateProductPage from "./screens/CreateProductPage";
 import EditProductPage from "./screens/EditProductPage";
@@ -27,4 +26,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-reportWebVitals();
+
