@@ -73,9 +73,16 @@ const ProductForm = ({ itemId }: ProductFormProps): JSX.Element => {
   const onSubmit = handleSubmit(async (data) => {
     if (itemId) {
       const editedItem = { ...data, id: parseInt(itemId), date: new Date() };
-      dispatch(editProductAsync(editedItem));
-      navigate("/");
-      return;
+      try {
+        const isUnique = await handleCheckUniqueProduct(editedItem.name);
+        if (isUnique) {
+          dispatch(editProductAsync(editedItem));
+          navigate("/");
+          return;
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
     const newProduct = { ...data, date: new Date() };
     try {
